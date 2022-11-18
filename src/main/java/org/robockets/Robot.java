@@ -73,9 +73,12 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        boolean done = true;
-        double trans = 0;
+        double timeS=(System.currentTimeMillis()-startTime)/1000;
+        boolean done = timeS>5;
+        double trans = 0.2;
         double rot = 0;
+        if(timeS<3) rot=.1;
+        if(timeS>=3) rot=-.1;
         if (!done) {
             switch (autoSelected) {
                 case CUSTOM_AUTO:
