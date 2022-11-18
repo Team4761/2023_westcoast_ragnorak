@@ -74,13 +74,18 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic()
     {
         boolean done = true;
+        double trans = 0;
+        double rot = 0;
         if (!done) {
             switch (autoSelected) {
                 case CUSTOM_AUTO:
+
                     // Put custom auto code here
                     break;
                 case DEFAULT_AUTO:
                 default:
+                    RobotMap.m_drive.arcadeDrive(trans,rot);
+
                     // Put default auto code here
                     break;
             }
