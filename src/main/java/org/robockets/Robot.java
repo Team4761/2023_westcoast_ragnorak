@@ -8,7 +8,11 @@ package org.robockets;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import org.robockets.command.MoveForwardCommand;
 
+import java.util.function.BooleanSupplier;
 
 
 /**
@@ -23,6 +27,8 @@ public class Robot extends TimedRobot
     private static final String CUSTOM_AUTO = "My Auto";
     private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
+
+    public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
 
     private long startTime;
     
@@ -66,30 +72,22 @@ public class Robot extends TimedRobot
     public void autonomousInit()
     {
         startTime = System.currentTimeMillis();
+        MoveForwardCommand moveForwardCommand = new MoveForwardCommand(.8);
+        MoveForwardCommand moveBackwardCommand = new MoveForwardCommand(-.8);
+        int timeout = 2;
+
+        commandScheduler.schedule(
+            moveForwardCommand.withTimeout(timeout).
+            andThen(moveBackwardCommand).withTimeout(timeout)
+        );
     }
-    
-    
+
+
     /** This method is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic()
     {
-        boolean done = true;
-        double trans = 0;
-        double rot = 0;
-        if (!done) {
-            switch (autoSelected) {
-                case CUSTOM_AUTO:
-
-                    // Put custom auto code here
-                    break;
-                case DEFAULT_AUTO:
-                default:
-                    RobotMap.m_drive.arcadeDrive(trans,rot);
-
-                    // Put default auto code here
-                    break;
-            }
-        }
+        commandScheduler.run();
     }
     
     
