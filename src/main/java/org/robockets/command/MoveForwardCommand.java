@@ -1,7 +1,7 @@
 package org.robockets.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import org.robockets.RobotMap;
+import org.robockets.robomap.RobotMap;
 
 public class MoveForwardCommand extends CommandBase {
     private double speed;
@@ -12,6 +12,6 @@ public class MoveForwardCommand extends CommandBase {
 
     @Override
     public void execute() {
-        RobotMap.m_drive.arcadeDrive(speed,0);
+        RobotMap.getDrive().arcadeDrive(speed,0);
     }
 }
