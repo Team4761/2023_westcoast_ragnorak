@@ -9,8 +9,12 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class RobotMap {
+    private static final boolean isWestCoast = true;
     public static DifferentialDrive getDrive() {
-        //return TalonRoboMap.getDrive();
-        return CanSparkMaxRoboMap.getDrive();
+        if (!isWestCoast) {
+            return TalonRoboMap.getDrive();
+        } else {
+            return CanSparkMaxRoboMap.getDrive();
+        }
     }
 }

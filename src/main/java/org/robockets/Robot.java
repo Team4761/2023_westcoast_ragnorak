@@ -11,8 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.robockets.command.MoveForwardCommand;
+import org.robockets.robomap.CanSparkMaxRoboMap;
+import org.robockets.robomap.RobotMap;
 
 import java.util.function.BooleanSupplier;
+
+import static org.robockets.OI.m_joystick;
 
 
 /**
@@ -72,13 +76,17 @@ public class Robot extends TimedRobot
     public void autonomousInit()
     {
         startTime = System.currentTimeMillis();
-        MoveForwardCommand moveForwardCommand = new MoveForwardCommand(.8);
-        MoveForwardCommand moveBackwardCommand = new MoveForwardCommand(-.8);
+        double topSpeed = .5;
+        MoveForwardCommand moveForwardCommand = new MoveForwardCommand(topSpeed);
+        MoveForwardCommand moveBackwardCommand = new MoveForwardCommand(-topSpeed);
         int timeout = 2;
 
         commandScheduler.schedule(
-            moveForwardCommand.withTimeout(timeout).
-            andThen(moveBackwardCommand).withTimeout(timeout)
+            new SequentialCommandGroup(
+               moveForwardCommand.withTimeout(timeout),
+               moveBackwardCommand.withTimeout(timeout),
+               new MoveForwardCommand(.2).withTimeout(timeout)
+            )
         );
     }
 
@@ -93,12 +101,16 @@ public class Robot extends TimedRobot
     
     /** This method is called once when teleop is enabled. */
     @Override
-    public void teleopInit() {}
+    public void teleopInit() {
+
+    }
     
     
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        CanSparkMaxRoboMap.m_drive.arcadeDrive(.2, 0);
+    }
     
     
     /** This method is called once when the robot is disabled. */
