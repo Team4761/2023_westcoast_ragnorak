@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class RobotMap {
     public static DifferentialDrive getDrive() {
-        return TalonRoboMap.getDrive();
-//        return CanSparkMaxRoboMap.getDrive();
+//        return TalonRoboMap.getDrive();
+        return CanSparkMaxRoboMap.getDrive();
     }
 }
