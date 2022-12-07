@@ -8,7 +8,7 @@ package org.robockets;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import org.robockets.robomap.RobotMap;
 
 
 /**
@@ -73,9 +73,22 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        boolean done = true;
+        boolean done = false;
         double trans = 0;
         double rot = 0;
+        double timeS = System.currentTimeMillis();
+        if(timeS <= 1.5){
+            trans = 0.5;
+            rot = 0.1;
+        }
+        else if (timeS <= 3) {
+            trans = -0.5;
+            rot = -0.1;
+        }
+        else{
+            done = true;
+        }
+
         if (!done) {
             switch (autoSelected) {
                 case CUSTOM_AUTO:
@@ -84,7 +97,7 @@ public class Robot extends TimedRobot
                     break;
                 case DEFAULT_AUTO:
                 default:
-                    RobotMap.m_drive.arcadeDrive(trans,rot);
+                    RobotMap.getDrive().arcadeDrive(trans,rot);
 
                     // Put default auto code here
                     break;
