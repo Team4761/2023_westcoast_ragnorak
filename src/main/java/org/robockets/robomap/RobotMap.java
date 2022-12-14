@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class RobotMap {
-    private static final boolean isWestCoast = true;
+    private static final boolean isWestCoast = false;
     public static DifferentialDrive getDrive() {
         if (!isWestCoast) {
             return TalonRoboMap.getDrive();

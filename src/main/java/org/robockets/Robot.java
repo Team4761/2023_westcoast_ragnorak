@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.robockets.command.MoveCommand;
+import org.robockets.command.MoveFeetForward;
 import org.robockets.command.MoveForwardCommand;
 import org.robockets.robomap.CanSparkMaxRoboMap;
 import org.robockets.robomap.RobotMap;
@@ -79,14 +80,13 @@ public class Robot extends TimedRobot
         startTime = System.currentTimeMillis();
         double topSpeed = .5;
         double rotation = .3;
-        MoveCommand moveForwardCommand = new MoveCommand(topSpeed, rotation);
-        MoveCommand moveBackwardCommand = new MoveCommand(-topSpeed, -rotation);
         int timeout = 2;
 
         commandScheduler.schedule(
             new SequentialCommandGroup(
-               moveForwardCommand.withTimeout(1.5),
-               moveBackwardCommand.withTimeout(3)
+                    new MoveFeetForward(.5, 5)
+//               new MoveCommand(topSpeed, rotation).withTimeout(1.5),
+//               new MoveCommand(-topSpeed, -rotation).withTimeout(3)
             )
         );
     }
