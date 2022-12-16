@@ -16,9 +16,6 @@ import org.robockets.command.MoveForwardCommand;
 import org.robockets.robomap.CanSparkMaxRoboMap;
 import org.robockets.robomap.RobotMap;
 
-import java.util.function.BooleanSupplier;
-
-import static org.robockets.OI.m_joystick;
 
 
 /**
@@ -35,8 +32,6 @@ public class Robot extends TimedRobot
     private final SendableChooser<String> chooser = new SendableChooser<>();
 
     public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
-
-    private long startTime;
     
     
     /**
@@ -77,7 +72,6 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        startTime = System.currentTimeMillis();
         double topSpeed = .5;
         double rotation = .3;
         int timeout = 2;
@@ -96,22 +90,37 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        commandScheduler.run();
+        double timeS=(System.currentTimeMillis()-startTime)/1000;
+        boolean done = timeS>5;
+        double trans = 0.2;
+        double rot = 0;
+        if(timeS<3) rot=.1;
+        if(timeS>=3) rot=-.1;
+        if (!done) {
+            switch (autoSelected) {
+                case CUSTOM_AUTO:
+
+                    // Put custom auto code here
+                    break;
+                case DEFAULT_AUTO:
+                default:
+                    RobotMap.m_drive.arcadeDrive(trans,rot);
+
+                    // Put default auto code here
+                    break;
+            }
+        }
     }
     
     
     /** This method is called once when teleop is enabled. */
     @Override
-    public void teleopInit() {
-
-    }
+    public void teleopInit() {}
     
     
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {
-        CanSparkMaxRoboMap.m_drive.arcadeDrive(.2, 0);
-    }
+    public void teleopPeriodic() {}
     
     
     /** This method is called once when the robot is disabled. */
