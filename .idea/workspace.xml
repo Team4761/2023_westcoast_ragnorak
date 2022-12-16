@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57284da6-342a-45f3-bba4-2d8d5c085c48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/robockets/robomap/CanSparkMaxRoboMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/robockets/robomap/TalonRoboMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendordeps/Phoenix-frc2022-latest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/robockets/robomap/RobotMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/robockets/robomap/RobotMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
