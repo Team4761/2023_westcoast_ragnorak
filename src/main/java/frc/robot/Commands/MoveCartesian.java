@@ -11,13 +11,13 @@ public class MoveCartesian extends CommandBase {
 
     private double X, Y, ROT;
 
-    private double moveNeeded;
+    private double moveNeeded, rotNeeded;
     
     public double setPointL, setPointR;
 
     private double speedL, speedR;
 
-    private PID drivePID = new PID(0.9, 0.2, 0.05);
+    private PID drivePID = new PID(0.4, 0.01, 0.005);
 
     public int phase = 0;
 
@@ -25,7 +25,7 @@ public class MoveCartesian extends CommandBase {
 
     // turn in direction of coord, move there, rotate to rot relative to origional rotation
     // 0 rot = robot is parallel to how it started
-    // x y units in revolutions for now, rot in degrees
+    // x y units in revolutions for now, rot in degrees, goes clockwise
     public MoveCartesian (DrivetrainCAN drivetrain, double x, double y, double rot) {
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
@@ -34,9 +34,9 @@ public class MoveCartesian extends CommandBase {
         ROT=rot;
 
         // in revs
-        moveNeeded = Math.atan2(x, y)*57.2957795131*m_drivetrain.drivetrainWidth/m_drivetrain.wheelDiameter;
-        setPointL = m_drivetrain.getLeftRevolutions() + moveNeeded;
-        setPointR = m_drivetrain.getRightRevolutions() - moveNeeded;
+        rotNeeded = Math.atan2(x, y)*0.159155*m_drivetrain.drivetrainWidth/m_drivetrain.wheelDiameter;
+        setPointL = m_drivetrain.getLeftRevolutions() + rotNeeded;
+        setPointR = m_drivetrain.getRightRevolutions() - rotNeeded;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MoveCartesian extends CommandBase {
                 speedR = drivePID.PIDGo(setPointR, m_drivetrain.getRightRevolutions());
                 m_drivetrain.driveTank(speedL, speedR);
                 
-                if (Math.abs(speedL) < 0.05 && Math.abs(speedR) < 0.05 && Math.abs(m_drivetrain.getLeftVelocity())<0.05 && Math.abs(m_drivetrain.getRightVelocity())<0.05) {
+                if (Math.abs(speedL) < 0.02 && Math.abs(speedR) < 0.02 && Math.abs(m_drivetrain.getLeftVelocity())<0.02 && Math.abs(m_drivetrain.getRightVelocity())<0.02) {
                     moveNeeded = Math.sqrt(X*X+Y*Y);
                     setPointL = m_drivetrain.getLeftRevolutions() + moveNeeded;
                     setPointR = m_drivetrain.getRightRevolutions() + moveNeeded;
@@ -64,10 +64,10 @@ public class MoveCartesian extends CommandBase {
                 speedR = drivePID.PIDGo(setPointR, m_drivetrain.getRightRevolutions());
                 m_drivetrain.driveTank(speedL, speedR);
 
-                if (Math.abs(speedL) < 0.05 && Math.abs(speedR) < 0.05 && Math.abs(m_drivetrain.getLeftVelocity())<0.05 && Math.abs(m_drivetrain.getRightVelocity())<0.05) {       
-                    moveNeeded = -moveNeeded+ROT;
-                    setPointL = m_drivetrain.getLeftRevolutions() + moveNeeded;
-                    setPointR = m_drivetrain.getRightRevolutions() - moveNeeded;
+                if (Math.abs(speedL) < 0.02 && Math.abs(speedR) < 0.02 && Math.abs(m_drivetrain.getLeftVelocity())<0.02 && Math.abs(m_drivetrain.getRightVelocity())<0.02) {       
+                    rotNeeded = -rotNeeded+ROT*0.00277777777*m_drivetrain.drivetrainWidth/m_drivetrain.wheelDiameter;
+                    setPointL = m_drivetrain.getLeftRevolutions() + rotNeeded;
+                    setPointR = m_drivetrain.getRightRevolutions() - rotNeeded;
                     phase++;
                 }
             break;
@@ -77,7 +77,7 @@ public class MoveCartesian extends CommandBase {
                 speedL = drivePID.PIDGo(setPointL, m_drivetrain.getLeftRevolutions());
                 speedR = drivePID.PIDGo(setPointR, m_drivetrain.getRightRevolutions());
                 m_drivetrain.driveTank(speedL, speedR);  
-                if (Math.abs(speedL) < 0.05 && Math.abs(speedR) < 0.05 && Math.abs(m_drivetrain.getLeftVelocity())<0.05 && Math.abs(m_drivetrain.getRightVelocity())<0.05) {
+                if (Math.abs(speedL) < 0.02 && Math.abs(speedR) < 0.02 && Math.abs(m_drivetrain.getLeftVelocity())<0.02 && Math.abs(m_drivetrain.getRightVelocity())<0.02) {
                     phase++;
                     finished = true;
                 }

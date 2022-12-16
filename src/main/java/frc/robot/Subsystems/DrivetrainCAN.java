@@ -24,7 +24,7 @@ public class DrivetrainCAN extends SubsystemBase{
 
   
   // singleton or something
-  private final static DrivetrainCAN INSTANCE = new DrivetrainCAN(7.958, 100, 6);
+  private final static DrivetrainCAN INSTANCE = new DrivetrainCAN(10, 65, 6);
   
   @SuppressWarnings("WeakerAccess")
   public static DrivetrainCAN getInstance() {

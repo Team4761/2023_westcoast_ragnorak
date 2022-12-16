@@ -61,7 +61,7 @@ public class GoCAN extends CommandBase{
 
         switch (driveMode) {
         case 0:
-            m_drivetrain.driveArcade(ApplyDeadzone(-m_controller.getLeftY(), 0.05), ApplyDeadzone(m_controller.getLeftX(), 0.05)); 
+            m_drivetrain.driveArcade(ApplyDeadzone(-m_controller.getLeftY(), 0.05), ApplyDeadzone(m_controller.getRightX(), 0.05)); 
             m_controller.setRumble(RumbleType.kLeftRumble, 0);
             m_controller.setRumble(RumbleType.kRightRumble, 0);
             break;

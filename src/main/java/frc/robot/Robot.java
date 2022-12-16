@@ -110,8 +110,15 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
         // Put default auto code here
+
+        
+        SmartDashboard.putNumber("Current Phase", moveCartesian.phase);
+        
         SmartDashboard.putNumber("Left Target", moveCartesian.setPointL);
         SmartDashboard.putNumber("Right Target", moveCartesian.setPointR);
+        
+        //i think need
+        moveCartesian.schedule();
         break;
     }
   }
