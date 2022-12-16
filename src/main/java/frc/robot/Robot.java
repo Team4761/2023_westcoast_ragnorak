@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
       default:
         // Put default auto code here
 
-        moveCartesian = new MoveCartesian(m_drivetrain, 2, -1, 0);
+        moveCartesian = new MoveCartesian(m_drivetrain, 1, 10, 180);
         moveCartesian.schedule();
         break;
     }
@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
 
         
         SmartDashboard.putNumber("Current Phase", moveCartesian.phase);
-        
+
         SmartDashboard.putNumber("Left Target", moveCartesian.setPointL);
         SmartDashboard.putNumber("Right Target", moveCartesian.setPointR);
         
