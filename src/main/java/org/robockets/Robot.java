@@ -10,12 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import org.robockets.command.MoveCommand;
 import org.robockets.command.MoveFeetForward;
-import org.robockets.command.MoveForwardCommand;
 import org.robockets.robomap.CanSparkMaxRoboMap;
-import org.robockets.robomap.RobotMap;
-
 
 
 /**
@@ -32,6 +28,8 @@ public class Robot extends TimedRobot
     private final SendableChooser<String> chooser = new SendableChooser<>();
 
     public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
+
+    private long startTime;
     
     
     /**
@@ -72,13 +70,14 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
+        startTime = System.currentTimeMillis();
         double topSpeed = .5;
         double rotation = .3;
         int timeout = 2;
 
         commandScheduler.schedule(
             new SequentialCommandGroup(
-                    new MoveFeetForward(.5, 5)
+                    new MoveFeetForward(topSpeed, 5)
 //               new MoveCommand(topSpeed, rotation).withTimeout(1.5),
 //               new MoveCommand(-topSpeed, -rotation).withTimeout(3)
             )
@@ -90,37 +89,22 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        double timeS=(System.currentTimeMillis()-startTime)/1000;
-        boolean done = timeS>5;
-        double trans = 0.2;
-        double rot = 0;
-        if(timeS<3) rot=.1;
-        if(timeS>=3) rot=-.1;
-        if (!done) {
-            switch (autoSelected) {
-                case CUSTOM_AUTO:
-
-                    // Put custom auto code here
-                    break;
-                case DEFAULT_AUTO:
-                default:
-                    RobotMap.m_drive.arcadeDrive(trans,rot);
-
-                    // Put default auto code here
-                    break;
-            }
-        }
+        commandScheduler.run();
     }
     
     
     /** This method is called once when teleop is enabled. */
     @Override
-    public void teleopInit() {}
+    public void teleopInit() {
+
+    }
     
     
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        CanSparkMaxRoboMap.m_drive.arcadeDrive(.2, 0);
+    }
     
     
     /** This method is called once when the robot is disabled. */
