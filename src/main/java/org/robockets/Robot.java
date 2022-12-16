@@ -8,7 +8,16 @@ package org.robockets;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import org.robockets.command.MoveCommand;
+import org.robockets.command.MoveForwardCommand;
+import org.robockets.robomap.CanSparkMaxRoboMap;
 import org.robockets.robomap.RobotMap;
+
+import java.util.function.BooleanSupplier;
+
+import static org.robockets.OI.m_joystick;
 
 
 /**
@@ -23,6 +32,8 @@ public class Robot extends TimedRobot
     private static final String CUSTOM_AUTO = "My Auto";
     private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
+
+    public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
 
     private long startTime;
     
@@ -73,22 +84,9 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        boolean done = false;
+        boolean done = true;
         double trans = 0;
         double rot = 0;
-        double timeS = System.currentTimeMillis();
-        if(timeS <= 1.5){
-            trans = 0.5;
-            rot = 0.1;
-        }
-        else if (timeS <= 3) {
-            trans = -0.5;
-            rot = -0.1;
-        }
-        else{
-            done = true;
-        }
-
         if (!done) {
             switch (autoSelected) {
                 case CUSTOM_AUTO:
