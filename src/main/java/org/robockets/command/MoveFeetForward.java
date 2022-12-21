@@ -3,7 +3,7 @@ package org.robockets.command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class MoveFeetForward extends SequentialCommandGroup {
-    private static final double ratio = 1.2;
+    private static final double ratio = 0.6;
 
     public MoveFeetForward(double speed, double feet) {
         super(

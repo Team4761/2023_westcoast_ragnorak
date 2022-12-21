@@ -8,7 +8,7 @@ public class MoveCommand extends CommandBase {
     private double speed;
     private double rotation;
 
-    private static double TIMEOUT_MAX = 5;
+    private static double TIMEOUT_MAX = 10;
     private static double SPEED_LIMIT = .8;
 
     public MoveCommand(double speed, double rotation) {
