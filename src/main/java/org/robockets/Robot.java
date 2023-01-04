@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.robockets.command.MoveFeetForward;
 import org.robockets.command.RotateDegreesCommand;
-import org.robockets.command.XboxDrive;
+import org.robockets.command.XboxArcadeDrive;
 import org.robockets.robomap.CanSparkMaxRoboMap;
 
 
@@ -30,7 +30,7 @@ public class Robot extends TimedRobot
     private final SendableChooser<String> chooser = new SendableChooser<>();
 
     public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
-    private final XboxDrive xboxDrive = new XboxDrive();
+    private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive();
 
     private long startTime;
     
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit() {
 
-        commandScheduler.schedule(xboxDrive.perpetually());
+        commandScheduler.schedule(xboxArcadeDrive.perpetually());
     }
     
     

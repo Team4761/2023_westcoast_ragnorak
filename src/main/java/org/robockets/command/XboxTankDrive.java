@@ -4,16 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.robockets.controller.XboxControl;
 import org.robockets.robomap.RobotMap;
 
-public class XboxDrive extends CommandBase {
-    private XboxControl xbox = new XboxControl(0);
+public class XboxTankDrive extends XboxDriveBase {
 
     @Override
     public void execute() {
-        RobotMap.getDrive().arcadeDrive(xbox.getSpeed(),xbox.getRotate());
+        RobotMap.getDrive().tankDrive(xbox.getLeftY(),xbox.getRightY());
     }
 
     @Override
     public void end(boolean interrupted) {
-        RobotMap.getDrive().arcadeDrive(0,0);
+        RobotMap.getDrive().tankDrive(0, 0);
     }
+
 }

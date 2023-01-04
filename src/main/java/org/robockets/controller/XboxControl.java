@@ -23,15 +23,25 @@ public class XboxControl {
         }
 
     }
-    public double getSpeed()
+    public double getLeftX()
+    {
+        double left = xbox.getLeftX() * (inverted ? -1 : 1);
+        return applyDeadzone(left,0.05);
+    }
+    
+    public double getRightX()
+    {
+        double right = xbox.getRightX() ;
+        return applyDeadzone(right,0.05);
+    }
+    public double getLeftY()
     {
         double left = xbox.getLeftY() * (inverted ? -1 : 1);
         return applyDeadzone(left,0.05);
     }
-    
-    public double getRotate()
+    public double getRightY()
     {
-        double rot = xbox.getRightX() ;
-        return applyDeadzone(rot,0.05);
+        double right = xbox.getRightY() * (inverted ? -1 : 1);
+        return applyDeadzone(right,0.05);
     }
 }
