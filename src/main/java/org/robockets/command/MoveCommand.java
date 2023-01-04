@@ -1,11 +1,14 @@
 package org.robockets.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import org.robockets.robomap.RobotMap;
+import org.robockets.Robot;
 
 public class MoveCommand extends CommandBase {
     private double speed;
     private double rotation;
+
+    private static double TIMEOUT_MAX = 10;
+    private static double SPEED_LIMIT = .8;
 
     public MoveCommand(double speed, double rotation) {
         this.speed = speed;
@@ -14,6 +17,6 @@ public class MoveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        RobotMap.getDrive().arcadeDrive(speed,rotation);
+        Robot.impl.getDrive().arcadeDrive(speed,rotation);
     }
 }
