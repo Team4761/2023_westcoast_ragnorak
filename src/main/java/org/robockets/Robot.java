@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.robockets.command.*;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -27,7 +26,7 @@ public class Robot extends TimedRobot
     private final SendableChooser<String> chooser = new SendableChooser<>();
 
     public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
-    private final XboxDrive xboxDrive = new XboxDrive();
+    private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive();
 
     public static RobotImpl impl = new WestCoast();
 
@@ -113,13 +112,12 @@ public class Robot extends TimedRobot
     
     /** This method is called once when teleop is enabled. */
     @Override
-    public void teleopInit() {}
-//    public void teleopInit() {
-//
-//        commandScheduler.schedule(xboxDrive.perpetually());
-//    }
+    public void teleopInit() {
 
-    
+        commandScheduler.schedule(xboxArcadeDrive.perpetually());
+    }
+
+
     /** This method is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {}

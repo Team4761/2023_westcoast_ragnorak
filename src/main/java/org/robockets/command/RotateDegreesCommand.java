@@ -7,7 +7,7 @@ public class RotateDegreesCommand extends SequentialCommandGroup {
 
     public RotateDegreesCommand(double speed, double degrees) {
         super(
-                new MoveCommand(0, speed).withTimeout(computeTime(speed, degrees))
+            new MoveCommand(0, speed).withTimeout(computeTime(speed, degrees))
         );
     }
 
