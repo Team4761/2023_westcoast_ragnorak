@@ -7,7 +7,7 @@ import org.robockets.controller.XboxControl;
 public class XboxArcadeDrive extends XboxDriveBase {
     @Override
     public void execute() {
-        Robot.impl.getDrive().arcadeDrive(xbox.getLeftX(),xbox.getRightX());
+        Robot.impl.getDrive().arcadeDrive(xbox.getLeftX(), xbox.getRightX());
     }
 
     @Override

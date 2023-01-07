@@ -1,6 +1,7 @@
 package org.robockets.command;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import org.robockets.Robot;
 
 public class MoveFeetForward extends SequentialCommandGroup {
     private static final double ratio = 0.6;
@@ -12,6 +13,6 @@ public class MoveFeetForward extends SequentialCommandGroup {
     }
 
     public static double computeTime(double speed, double feet) {
-        return feet * speed * ratio;
+        return Robot.impl.calcTimeToMoveFeet(feet, speed);
     }
 }

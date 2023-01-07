@@ -56,8 +56,8 @@ public class Robot extends TimedRobot
     @Override
     public void robotPeriodic() {
     }
-    
-    
+
+
     /**
      * This autonomous (along with the chooser code above) shows how to select between different
      * autonomous modes using the dashboard. The sendable chooser code works with the Java
@@ -77,39 +77,24 @@ public class Robot extends TimedRobot
         int timeout = 2;
 
         commandScheduler.schedule(
-            new SequentialCommandGroup(
-                    new MoveForward(topSpeed, 5)
-//               new MoveCommand(topSpeed, rotation).withTimeout(1.5),
-//               new MoveCommand(-topSpeed, -rotation).withTimeout(3)
-            )
+                new SequentialCommandGroup(
+                    new MoveFeetForward(topSpeed, 20),
+                    new RotateDegreesCommand(0.5, 180),
+                    new MoveFeetForward(topSpeed, 20),
+                    new RotateDegreesCommand(0.5, 180)
+                )
         );
     }
-    
-    
+
+
     /** This method is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic()
     {
-        boolean done = true;
-        double trans = 0;
-        double rot = 0;
-        if (!done) {
-            switch (autoSelected) {
-                case CUSTOM_AUTO:
-
-                    // Put custom auto code here
-                    break;
-                case DEFAULT_AUTO:
-                default:
-                    impl.getDrive().arcadeDrive(trans,rot);
-
-                    // Put default auto code here
-                    break;
-            }
-        }
+        commandScheduler.run();
     }
-    
-    
+
+
     /** This method is called once when teleop is enabled. */
     @Override
     public void teleopInit() {
@@ -120,27 +105,26 @@ public class Robot extends TimedRobot
 
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
-//    public void teleopPeriodic() {
-//        commandScheduler.run();
-//    }
+    public void teleopPeriodic() {
+        commandScheduler.run();
+    }
 
-    
+
     /** This method is called once when the robot is disabled. */
     @Override
     public void disabledInit() {}
-    
-    
+
+
     /** This method is called periodically when disabled. */
     @Override
     public void disabledPeriodic() {}
-    
-    
+
+
     /** This method is called once when test mode is enabled. */
     @Override
     public void testInit() {}
-    
-    
+
+
     /** This method is called periodically during test mode. */
     @Override
     public void testPeriodic() {}

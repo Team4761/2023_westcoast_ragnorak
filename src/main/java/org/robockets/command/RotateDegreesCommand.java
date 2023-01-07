@@ -1,6 +1,7 @@
 package org.robockets.command;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import org.robockets.Robot;
 
 public class RotateDegreesCommand extends SequentialCommandGroup {
     private static final double ratio = 0.9;
@@ -12,6 +13,6 @@ public class RotateDegreesCommand extends SequentialCommandGroup {
     }
 
     public static double computeTime(double speed, double degrees) {
-        return degrees/90.0 * speed * ratio;
+        return Robot.impl.calcTimeToRotate(degrees, speed);
     }
 }
