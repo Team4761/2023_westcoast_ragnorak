@@ -1,9 +1,9 @@
-package org.robockets;
+package org.robockets.impl;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.robockets.robomap.CanSparkMaxRoboMap;
 
-public class WestCoast extends RobotImpl{
+public class Terry extends RobotImpl{
     @Override
     public DifferentialDrive getDrive() {
         return CanSparkMaxRoboMap.getDrive();

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.robockets.command.*;
+import org.robockets.impl.RobotImpl;
+import org.robockets.impl.WestCoast;
 
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
@@ -22,16 +24,12 @@ public class Robot extends TimedRobot
 {
     private static final String DEFAULT_AUTO = "Default";
     private static final String CUSTOM_AUTO = "My Auto";
-    private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
 
     public final CommandScheduler commandScheduler = CommandScheduler.getInstance();
     private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive();
 
     public static RobotImpl impl = new WestCoast();
-
-    private long startTime;
-    
     
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -71,11 +69,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        startTime = System.currentTimeMillis();
         double topSpeed = .5;
-        double rotation = .3;
-        int timeout = 2;
-
         commandScheduler.schedule(
                 new SequentialCommandGroup(
                     new MoveFeetForward(topSpeed, 20),
@@ -98,8 +92,7 @@ public class Robot extends TimedRobot
     /** This method is called once when teleop is enabled. */
     @Override
     public void teleopInit() {
-
-        commandScheduler.schedule(xboxArcadeDrive.perpetually());
+        commandScheduler.schedule(xboxArcadeDrive.repeatedly());
     }
 
 
