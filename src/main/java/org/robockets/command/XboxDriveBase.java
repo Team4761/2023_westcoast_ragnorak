@@ -1,10 +1,10 @@
 package org.robockets.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import org.robockets.controller.XboxControl;
 
 public abstract class XboxDriveBase extends CommandBase {
-    protected CommandXboxController xbox = new CommandXboxController(0);
+    protected XboxControl xbox = new XboxControl(0);
 
     @Override
     public abstract void execute();

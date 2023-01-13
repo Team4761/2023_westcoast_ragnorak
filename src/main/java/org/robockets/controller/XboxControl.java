@@ -1,14 +1,14 @@
 package org.robockets.controller;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class XboxControl {
-    private XboxController xbox;
+    private CommandXboxController xbox;
     private boolean inverted = true;
 
     public XboxControl(int port)
     {
-        xbox=new XboxController(port);
+        xbox = new CommandXboxController(port);
     }
 
     double applyDeadzone (double value, double deadzone) {
